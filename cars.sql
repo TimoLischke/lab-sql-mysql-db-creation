@@ -65,18 +65,11 @@ CREATE TABLE IF NOT EXISTS `cars`.`invoices` (
   `invoices_auto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `invoices_id` INT UNSIGNED NOT NULL,
   `date` DATE NOT NULL,
-  `salesperson_staff_id` INT UNSIGNED NOT NULL,
   `customers_customer_id` INT UNSIGNED NOT NULL,
   UNIQUE INDEX `car_sale_cust_auto_UNIQUE` (`invoices_auto` ASC) VISIBLE,
   PRIMARY KEY (`invoices_id`),
   UNIQUE INDEX `car_sale_cust_id_UNIQUE` (`invoices_id` ASC) VISIBLE,
-  INDEX `fk_invoices_salesperson1_idx` (`salesperson_staff_id` ASC) VISIBLE,
   INDEX `fk_invoices_customers1_idx` (`customers_customer_id` ASC) VISIBLE,
-  CONSTRAINT `fk_invoices_salesperson1`
-    FOREIGN KEY (`salesperson_staff_id`)
-    REFERENCES `cars`.`salesperson` (`staff_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_invoices_customers1`
     FOREIGN KEY (`customers_customer_id`)
     REFERENCES `cars`.`customers` (`customer_id`)
@@ -90,7 +83,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cars`.`cars` (
   `cars_auto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `VIN` INT UNSIGNED NOT NULL,
+  `VIN` VARCHAR(45) NOT NULL,
   `manufacturer` VARCHAR(45) NULL,
   `model` VARCHAR(45) NULL,
   `year` YEAR(4) NULL,
